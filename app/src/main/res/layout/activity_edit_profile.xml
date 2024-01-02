@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CircleImage"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="41dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-32dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_photo"
+        app:layout_constraintTop_toBottomOf="@+id/iv_photo"
+        app:srcCompat="@drawable/ic_camera" />
+
+    <EditText
+        android:id="@+id/edNama"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="79dp"
+        android:drawableStart="@drawable/ic_person"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Fajar Setyawan"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    <EditText
+        android:id="@+id/ed_no_hp"
+        android:layout_width="252dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="79dp"
+        android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Nomor HP"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hp" />
+
+    <EditText
+        android:id="@+id/ed_alamat"
+        android:layout_width="253dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="79dp"
+        android:drawableStart="@drawable/ic_address"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Alamat"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_alamat" />
+
+    <TextView
+        android:id="@+id/tv_alamat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="16dp"
+        android:text="Alamat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_no_hp" />
+
+    <TextView
+        android:id="@+id/tvKelamin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onRadioButtonClicked"
+        android:text="Kelamin"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_alamat" />
+
+    <RadioGroup
+        android:id="@+id/rg_gender"
+        android:layout_width="279dp"
+        android:layout_height="77dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKelamin">
+
+        <RadioButton
+            android:id="@+id/rb_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:onClick="onRadioButtonClicked"
+            android:paddingEnd="32dp"
+            android:text="Laki-laki"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/rb_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="Perempuan"
+            android:textSize="14sp" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="196dp"
+        android:text="Nama"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_hp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="16dp"
+        android:text="Nomor HP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edNama" />
+
+    <Button
+        android:id="@+id/btnSimpan"
+        android:layout_width="269dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="36dp"
+        android:text="Simpan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/progress_circular"
+        layout="@layout/progress_bar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "171850794115",
+    "project_id": "myemarket-ce53c",
+    "storage_bucket": "myemarket-ce53c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171850794115:android:02bffe835907f14c8247b6",
+        "android_client_info": {
+          "package_name": "com.fajar.myemarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171850794115-8au8r4f0a6bd1v1q3va8kmhrh7ivihvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fajar.myemarket",
+            "certificate_hash": "5410ce6411b07919068c4bc81ed1191965fd9d36"
+          }
+        },
+        {
+          "client_id": "171850794115-ficf65mhrvc7hn7g9jvj599m2dsbkki5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdz0GN1OCG-uSBwxWNxAeY4-4_braEyFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171850794115-ficf65mhrvc7hn7g9jvj599m2dsbkki5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

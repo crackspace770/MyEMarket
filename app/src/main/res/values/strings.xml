@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MyEMarket</string>
+
+    <string-array name="Kelamin">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
+    <string name="profile_user">Profile</string>
+    <string name="store_name">Toko lorem ipsum</string>
+    <string name="store_address">Jl. Lorem Ipsum</string>
+    <string name="store_price">500.000,00</string>
+    <string name="store_image">Gambar Toko</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="belum_punya_akun_silahkan_registrasi">Belum punya akun? silahkan registrasi</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="sample_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+    <string name="day">Hari</string>
+    <string name="waktu">Waktu</string>
+    <string name="booking">Booking!</string>
+    <string name="atas_nama">Atas Nama</string>
+    <string name="like">Like</string>
+
+    <string name="home_title">Home</string>
+    <string name="transaction_title">Transaksi</string>
+    <string name="boomark_title">Bookmark</string>
+    <string name="status">Status</string>
+
+    <string name="password_error">Kata sandi kurang dari 6 karakter</string>
+</resources>
