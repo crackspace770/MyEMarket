@@ -2,7 +2,7 @@ package com.fajar.myemarket.ui.buyer.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.fajar.myemarket.model.Category
+import com.fajar.myemarket.core.model.Category
 import com.fajar.myemarket.ui.buyer.viewmodel.CategoryViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 

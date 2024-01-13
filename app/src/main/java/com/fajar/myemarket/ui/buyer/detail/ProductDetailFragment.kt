@@ -13,12 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fajar.myemarket.R
-import com.fajar.myemarket.adapter.ColorAdapter
-import com.fajar.myemarket.adapter.SizeAdapter
-import com.fajar.myemarket.adapter.ViewPager2Images
+import com.fajar.myemarket.core.adapter.ColorAdapter
+import com.fajar.myemarket.core.adapter.SizeAdapter
+import com.fajar.myemarket.core.adapter.ViewPager2Images
+import com.fajar.myemarket.core.model.CartProduct
 import com.fajar.myemarket.databinding.FragmentDetailBinding
-import com.fajar.myemarket.model.CartProduct
 import com.fajar.myemarket.utils.Resource
+import com.fajar.myemarket.utils.hideBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -40,7 +41,7 @@ class ProductDetailFragment: Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    //hideBottomNavigationView()
+    hideBottomNavigationView()
     binding = FragmentDetailBinding.inflate(inflater)
     return binding.root
   }
@@ -96,7 +97,7 @@ class ProductDetailFragment: Fragment() {
       tvProductName.text = product.name
       tvProductPrice.text = "$ ${product.price}"
       tvProductDescription.text = product.description
-
+      tvSellerName.text = "By ${product.sellerName}"
       if (product.colors.isNullOrEmpty())
         tvProductColors.visibility = View.INVISIBLE
       if (product.sizes.isNullOrEmpty())
@@ -106,6 +107,7 @@ class ProductDetailFragment: Fragment() {
     viewPagerAdapter.differ.submitList(product.images)
     product.colors?.let { colorsAdapter.differ.submitList(it) }
     product.sizes?.let { sizesAdapter.differ.submitList(it) }
+
   }
 
   private fun setupViewpager() {

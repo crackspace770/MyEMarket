@@ -2,8 +2,8 @@ package com.fajar.myemarket.ui.buyer.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fajar.myemarket.firebase.FirebaseCommon
-import com.fajar.myemarket.model.CartProduct
+import com.fajar.myemarket.core.firebase.FirebaseCommon
+import com.fajar.myemarket.core.model.CartProduct
 import com.fajar.myemarket.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

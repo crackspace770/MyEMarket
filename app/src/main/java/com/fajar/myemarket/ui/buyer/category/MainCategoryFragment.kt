@@ -10,19 +10,17 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fajar.myemarket.adapter.BestProductsAdapter
 import com.fajar.myemarket.R
-import com.fajar.myemarket.adapter.BestDealsAdapter
-import com.fajar.myemarket.adapter.SpecialProductAdapter
+import com.fajar.myemarket.core.adapter.BestDealsAdapter
+import com.fajar.myemarket.core.adapter.BestProductsAdapter
+import com.fajar.myemarket.core.adapter.SpecialProductAdapter
 import com.fajar.myemarket.databinding.FragmentMainCategoryBinding
-import com.fajar.myemarket.ui.buyer.list.HomeFragmentDirections
 import com.fajar.myemarket.ui.buyer.viewmodel.MainCategoryViewModel
 import com.fajar.myemarket.utils.Resource
+import com.fajar.myemarket.utils.showBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -53,19 +51,20 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         setupBestDealsRv()
         setupBestProducts()
 
-        specialProductsAdapter.onClick = { product ->
-            val action = HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(product)
-            findNavController().navigate(action)
+
+        specialProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
         }
 
         bestDealsAdapter.onClick = {
             val b = Bundle().apply { putParcelable("product",it) }
-            findNavController().navigate(R.id.action_homeFragment_to_ProductDetailsFragment,b)
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
         }
 
         bestProductsAdapter.onClick = {
             val b = Bundle().apply { putParcelable("product",it) }
-            findNavController().navigate(R.id.action_homeFragment_to_ProductDetailsFragment,b)
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
         }
 
 
@@ -171,7 +170,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
     override fun onResume() {
         super.onResume()
 
-
+        showBottomNavigationView()
     }
 
 }

@@ -2,7 +2,7 @@ package com.fajar.myemarket.di
 
 import android.app.Application
 import android.content.Context
-import com.fajar.myemarket.firebase.FirebaseCommon
+import com.fajar.myemarket.core.firebase.FirebaseCommon
 import com.fajar.myemarket.preference.UserPreference
 import com.fajar.myemarket.utils.Constants.INTRODUCTION_SP
 import com.google.firebase.auth.FirebaseAuth

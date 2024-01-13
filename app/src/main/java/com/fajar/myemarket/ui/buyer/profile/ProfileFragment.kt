@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.fajar.myemarket.databinding.FragmentProfileBinding
 import com.fajar.myemarket.preference.UserPreference
+import com.fajar.myemarket.databinding.FragmentProfileBinding
 import com.fajar.myemarket.ui.buyer.auth.LoginActivity
 import com.fajar.myemarket.utils.loadImageUrl
+import com.fajar.myemarket.utils.showBottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -40,11 +41,11 @@ class ProfileFragment:Fragment() {
 
       //  initializeToolbar()
         retrieveData()
+        retrieveDeliveryAddress()
         onActions()
         logout()
 
     }
-
 
 
     private fun retrieveData(){
@@ -80,10 +81,42 @@ class ProfileFragment:Fragment() {
 
     }
 
+    private fun retrieveDeliveryAddress() {
+        val userId = auth.currentUser!!.uid
+        val dataUser = db?.collection("user")?.document(userId)?.collection("address")
+
+        dataUser?.addSnapshotListener { snapshot, exception ->
+            exception?.let {
+                Log.d(TAG, it.message.toString())
+                return@addSnapshotListener
+            }
+            snapshot?.let {
+                for (document in it) {
+                    val fullName = document.getString("fullName")
+                    val street = document.getString("street")
+                    val phone = document.getString("phone")
+                    val city = document.getString("city")
+                    val state = document.getString("state")
+
+                    binding?.apply {
+                        tvFullname.text = fullName.toString()
+                        tvStreet.text = street.toString()
+
+                    }
+
+                }
+            }
+        }
+    }
+
     private fun onActions(){
 
         binding?.tvEditProfil?.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
+
+        binding?.tvEditAddress?.setOnClickListener {
+            startActivity(Intent(requireContext(), EditAddressActivity::class.java))
         }
 
     }
@@ -123,6 +156,12 @@ class ProfileFragment:Fragment() {
 
     companion object {
         const val TAG = "MainActivity"
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showBottomNavigationView()
     }
 
 }

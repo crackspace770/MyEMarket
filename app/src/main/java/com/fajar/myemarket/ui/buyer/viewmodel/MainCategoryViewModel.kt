@@ -2,7 +2,7 @@ package com.fajar.myemarket.ui.buyer.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fajar.myemarket.model.Product
+import com.fajar.myemarket.core.model.Product
 import com.fajar.myemarket.utils.Resource
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel

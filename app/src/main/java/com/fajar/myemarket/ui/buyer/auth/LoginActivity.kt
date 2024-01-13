@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.fajar.myemarket.R
-import com.fajar.myemarket.databinding.ActivityLoginBinding
 import com.fajar.myemarket.preference.UserPreference
+import com.fajar.myemarket.databinding.ActivityLoginBinding
 import com.fajar.myemarket.ui.buyer.MainActivity
 import com.fajar.myemarket.ui.seller.SellerActivity
 import com.fajar.myemarket.utils.NetworkConnectionLiveData

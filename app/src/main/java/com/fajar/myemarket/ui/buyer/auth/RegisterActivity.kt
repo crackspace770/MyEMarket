@@ -9,8 +9,8 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.fajar.myemarket.R
+import com.fajar.myemarket.core.model.User
 import com.fajar.myemarket.databinding.ActivityRegisterBinding
-import com.fajar.myemarket.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore

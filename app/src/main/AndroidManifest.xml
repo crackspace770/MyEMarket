@@ -42,6 +42,15 @@
             android:exported="false"
             />
 
+        <activity android:name=".ui.buyer.detail.ProductDetailActivity"
+            android:exported="false"
+            />
+
+        <activity android:name=".ui.buyer.profile.EditAddressActivity"
+            android:exported="false"
+            />
+
+
     </application>
 
 </manifest>

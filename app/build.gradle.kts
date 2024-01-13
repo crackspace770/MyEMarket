@@ -49,7 +49,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-auth:22.3.0")
 
@@ -65,6 +65,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.5.2")
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.2")
 
+    //Android Ktx
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.4.2")
+
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.15.1")
 
@@ -76,6 +79,7 @@ dependencies {
     //Dagger hilt
     implementation ("com.google.dagger:hilt-android:2.44")
     kapt ("com.google.dagger:hilt-android-compiler:2.44")
+
 
     //Firebase
     implementation ("com.google.firebase:firebase-auth:22.3.0")
@@ -104,5 +108,8 @@ dependencies {
     //Color picker
     implementation ("com.github.skydoves:colorpickerview:2.2.4")
 
+    implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
+
+    implementation ("com.github.shuhart:stepview:1.5.1")
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seller_graph"
+    app:startDestination="@id/uploadFragment">
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.fajar.myemarket.ui.seller.upload.UploadFragment"
+        android:label="UploadFragment"
+        tools:layout="@layout/fragment_upload"
+        />
+    <fragment
+        android:id="@+id/sellerItemFragment"
+        android:name="com.fajar.myemarket.ui.seller.item.SellerItemFragment"
+        android:label="SellerOrderFragment"
+        tools:layout="@layout/fragment_seller_item"
+        >
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_itemDetailFragment"
+            app:destination="@id/itemDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSellerFragment"
+        android:name="com.fajar.myemarket.ui.seller.profile.ProfileSellerFragment"
+        android:label="ProfileSellerFragment"
+        tools:layout="@layout/fragment_profile_seller"
+        />
+    <fragment
+        android:id="@+id/itemDetailFragment"
+        android:name="com.fajar.myemarket.ui.seller.detail.ItemDetailFragment"
+        android:label="ItemDetailFragment"
+        tools:layout="@layout/fragment_item_detail"
+        >
+        <argument
+            android:name="products"
+            app:argType="com.fajar.myemarket.core.model.Product" />
+    </fragment>
+</navigation>

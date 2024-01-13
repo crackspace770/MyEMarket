@@ -1,5 +1,6 @@
 package com.fajar.myemarket.ui.buyer.category
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fajar.myemarket.R
-import com.fajar.myemarket.adapter.BestProductsAdapter
+import com.fajar.myemarket.core.adapter.BestProductsAdapter
 import com.fajar.myemarket.databinding.FragmentBaseCategoryBinding
+import com.fajar.myemarket.utils.showBottomNavigationView
 
 open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
 
@@ -33,6 +36,26 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
 
         setupOffer()
         setupBestProduct()
+
+        offerAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
+        }
+
+        bestProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
+        }
+
+        binding.rvOffer.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!recyclerView.canScrollVertically(1) && dx != 0){
+                    onOfferPagingRequest()
+                }
+            }
+        })
 
         binding.nestedScrollBaseCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{v, _, scrollY, _, _ ->
             if (v.getChildAt(0).bottom <= v.height + scrollY) {
@@ -82,6 +105,7 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
     override fun onResume() {
         super.onResume()
 
+        showBottomNavigationView()
     }
 
 }

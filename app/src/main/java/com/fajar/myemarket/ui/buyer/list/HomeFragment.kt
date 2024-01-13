@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.fajar.myemarket.adapter.HomeViewPagerAdapter
+import com.fajar.myemarket.core.adapter.HomeViewPagerAdapter
 import com.fajar.myemarket.databinding.FragmentHomeBinding
 import com.fajar.myemarket.ui.buyer.category.AccessoriesFragment
 import com.fajar.myemarket.ui.buyer.category.ChairFragment
@@ -14,8 +14,7 @@ import com.fajar.myemarket.ui.buyer.category.FurnitureFragment
 import com.fajar.myemarket.ui.buyer.category.MainCategoryFragment
 import com.fajar.myemarket.ui.buyer.category.TableFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+
 
 class HomeFragment:Fragment() {
 

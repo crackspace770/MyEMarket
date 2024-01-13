@@ -2,8 +2,8 @@ package com.fajar.myemarket.ui.buyer.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fajar.myemarket.model.Category
-import com.fajar.myemarket.model.Product
+import com.fajar.myemarket.core.model.Category
+import com.fajar.myemarket.core.model.Product
 import com.fajar.myemarket.utils.Resource
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,15 +22,13 @@ class CategoryViewModel constructor(
     val bestProducts = _bestProducts.asStateFlow()
 
     init {
-
         fetchOfferProducts()
         fetchBestProducts()
     }
 
-    fun fetchOfferProducts(){
+    private fun fetchOfferProducts() {
         viewModelScope.launch {
             _offerProducts.emit(Resource.Loading())
-
         }
         firestore.collection("Products").whereEqualTo("category", category.category)
             .whereNotEqualTo("offerPercentage", null).get()
@@ -39,30 +37,27 @@ class CategoryViewModel constructor(
                 viewModelScope.launch {
                     _offerProducts.emit(Resource.Success(products))
                 }
-            }
-            .addOnFailureListener {
+            }.addOnFailureListener {
                 viewModelScope.launch {
                     _offerProducts.emit(Resource.Error(it.message.toString()))
                 }
             }
     }
 
-    fun fetchBestProducts(){
+    private fun fetchBestProducts() {
         viewModelScope.launch {
-            _offerProducts.emit(Resource.Loading())
-
+            _bestProducts.emit(Resource.Loading())
         }
         firestore.collection("Products").whereEqualTo("category", category.category)
-            .whereNotEqualTo("offerPercentage", null).get()
+            .whereEqualTo("offerPercentage", null).get()
             .addOnSuccessListener {
                 val products = it.toObjects(Product::class.java)
                 viewModelScope.launch {
-                    _offerProducts.emit(Resource.Success(products))
+                    _bestProducts.emit(Resource.Success(products))
                 }
-            }
-            .addOnFailureListener {
+            }.addOnFailureListener {
                 viewModelScope.launch {
-                    _offerProducts.emit(Resource.Error(it.message.toString()))
+                    _bestProducts.emit(Resource.Error(it.message.toString()))
                 }
             }
     }

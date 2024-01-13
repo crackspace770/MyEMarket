@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.fajar.myemarket.model.Category
+import com.fajar.myemarket.core.model.Category
 import com.fajar.myemarket.ui.buyer.viewmodel.CategoryViewModel
 import com.fajar.myemarket.ui.buyer.viewmodel.factory.BaseCategoryViewModelFactory
 import com.fajar.myemarket.utils.Resource
@@ -46,6 +46,27 @@ class ChairFragment: BaseCategoryFragment(){
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.bestProducts.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showBestProductsLoading()
+                    }
+                    is Resource.Success -> {
+                        bestProductsAdapter.differ.submitList(it.data)
+                        hideBestProductsLoading()
+                    }
+                    is Resource.Error -> {
+                        Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
+                            .show()
+                        hideBestProductsLoading()
+                    }
+                    else -> Unit
+                }
+            }
+        }
+
     }
 
     override fun onBestProductsPagingRequest() {
