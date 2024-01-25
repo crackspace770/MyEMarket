@@ -62,10 +62,7 @@ class OrderFragment:Fragment() {
         }
 
         ordersAdapter.onClick = {
-            val action =
-               OrderFragmentDirections.actionOrderFragmentToOrderDetailFragment(
-                    it
-                )
+            val action = OrderFragmentDirections.actionOrderFragmentToOrderDetailFragment(it)
             findNavController().navigate(action)
         }
 

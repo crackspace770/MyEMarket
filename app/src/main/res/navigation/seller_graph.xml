@@ -27,6 +27,7 @@
         android:label="ProfileSellerFragment"
         tools:layout="@layout/fragment_profile_seller"
         />
+
     <fragment
         android:id="@+id/itemDetailFragment"
         android:name="com.fajar.myemarket.ui.seller.detail.ItemDetailFragment"
@@ -36,5 +37,26 @@
         <argument
             android:name="products"
             app:argType="com.fajar.myemarket.core.model.Product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sellerOrderFragment"
+        android:name="com.fajar.myemarket.ui.seller.order.SellerOrderFragment"
+        android:label="SellerOrderFragment"
+        tools:layout="@layout/fragment_seller_order"
+        >
+        <action
+            android:id="@+id/action_sellerOrderFragment_to_sellerOrderDetailFragment"
+            app:destination="@id/sellerOrderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerOrderDetailFragment"
+        android:name="com.fajar.myemarket.ui.seller.order.SellerOrderDetailFragment"
+        android:label="SellerOrderDetailFragment"
+        tools:layout="@layout/fragment_seller_order_detail"
+        >
+        <argument
+            android:name="order"
+            app:argType="com.fajar.myemarket.core.model.Order" />
     </fragment>
 </navigation>

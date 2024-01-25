@@ -31,7 +31,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
 
     private lateinit var binding: FragmentMainCategoryBinding
     private lateinit var specialProductsAdapter: SpecialProductAdapter
-    private lateinit var bestDealsAdapter: BestDealsAdapter
     private lateinit var bestProductsAdapter: BestProductsAdapter
     private val viewModel by viewModels<MainCategoryViewModel>()
 
@@ -48,7 +47,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         super.onViewCreated(view, savedInstanceState)
 
         setupSpecialProductsRv()
-        setupBestDealsRv()
         setupBestProducts()
 
 
@@ -57,10 +55,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
             findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
         }
 
-        bestDealsAdapter.onClick = {
-            val b = Bundle().apply { putParcelable("product",it) }
-            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
-        }
 
         bestProductsAdapter.onClick = {
             val b = Bundle().apply { putParcelable("product",it) }
@@ -88,25 +82,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.bestDealsProducts.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                  //      showLoading()
-                    }
-                    is Resource.Success -> {
-                        bestDealsAdapter.differ.submitList(it.data)
-                   //     hideLoading()
-                    }
-                    is Resource.Error -> {
-                     //   hideLoading()
-                        Log.e(TAG, it.message.toString())
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> Unit
-                }
-            }
-        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.bestProducts.collectLatest {
@@ -147,14 +122,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         }
     }
 
-    private fun setupBestDealsRv() {
-        bestDealsAdapter = BestDealsAdapter()
-        binding.rvBestDeal.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = bestDealsAdapter
-        }
-    }
+
 
 
 

@@ -1,4 +1,4 @@
-package com.fajar.myemarket.ui.buyer.order
+package com.fajar.myemarket.ui.seller.order
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,10 +13,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrderAllViewModel @Inject constructor(
+class SellerOrderViewModel @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: FirebaseAuth
-): ViewModel() {
+):ViewModel() {
 
     private val _allOrders = MutableStateFlow<Resource<List<Order>>>(Resource.Unspecified())
     val allOrders = _allOrders.asStateFlow()
@@ -25,20 +25,21 @@ class OrderAllViewModel @Inject constructor(
         getAllOrders()
     }
 
-    private fun getAllOrders(){
+    private fun getAllOrders() {
         viewModelScope.launch {
             _allOrders.emit(Resource.Loading())
         }
 
         firestore.collection("orders").get()
-            .addOnSuccessListener {
-                val orders = it.toObjects(Order::class.java)
+            .addOnSuccessListener { querySnapshot ->
+                val orders = querySnapshot.toObjects(Order::class.java)
                 viewModelScope.launch {
                     _allOrders.emit(Resource.Success(orders))
                 }
-            }.addOnFailureListener {
+            }
+            .addOnFailureListener { exception ->
                 viewModelScope.launch {
-                    _allOrders.emit(Resource.Error(it.message.toString()))
+                    _allOrders.emit(Resource.Error(exception.message.toString()))
                 }
             }
     }

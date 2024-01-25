@@ -56,6 +56,31 @@ class FirebaseCommon(
         }
     }
 
+    fun updateOrderStatus(orderId: Long, newStatus: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (userId != null) {
+            val orderRef = firestore.collection("user").document(userId)
+                .collection("seller_order").document(orderId.toString())
+
+            val updateData = mapOf(
+                "orderStatus" to newStatus
+                // Add other fields you want to update, if any
+            )
+
+            orderRef
+                .update(updateData)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Order status updated successfully
+                        // Handle any additional logic after a successful update
+                    } else {
+                        // Failed to update order status
+                    }
+                }
+        }
+    }
+
 
 
     enum class QuantityChanging {

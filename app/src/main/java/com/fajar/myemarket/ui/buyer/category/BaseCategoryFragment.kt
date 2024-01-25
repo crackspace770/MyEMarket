@@ -34,43 +34,15 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupOffer()
         setupBestProduct()
-
-        offerAdapter.onClick = {
-            val b = Bundle().apply { putParcelable("product",it) }
-            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
-        }
 
         bestProductsAdapter.onClick = {
             val b = Bundle().apply { putParcelable("product",it) }
             findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment,b)
         }
 
-        binding.rvOffer.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                if (!recyclerView.canScrollVertically(1) && dx != 0){
-                    onOfferPagingRequest()
-                }
-            }
-        })
-
-        binding.nestedScrollBaseCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{v, _, scrollY, _, _ ->
-            if (v.getChildAt(0).bottom <= v.height + scrollY) {
-                onBestProductsPagingRequest()
-            }
-        })
     }
 
-    open fun onOfferPagingRequest(){
-
-    }
-
-    open fun onBestProductsPagingRequest(){
-
-    }
 
     fun showOfferLoading(){
         binding.offerProductsProgressBar.visibility = View.VISIBLE
@@ -95,12 +67,7 @@ open class BaseCategoryFragment:Fragment(R.layout.fragment_base_category) {
         }
     }
 
-    private fun setupOffer(){
-        binding.rvOffer.apply {
-            LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-            adapter = offerAdapter
-        }
-    }
+
 
     override fun onResume() {
         super.onResume()

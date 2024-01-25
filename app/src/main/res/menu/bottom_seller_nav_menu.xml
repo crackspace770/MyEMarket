@@ -8,8 +8,14 @@
 
     <item
         android:id="@+id/sellerItemFragment"
+        android:icon="@drawable/baseline_add_shopping_cart_24"
+        android:title="@string/item_title" />
+
+    <item
+        android:id="@+id/sellerOrderFragment"
         android:icon="@drawable/ic_books"
-        android:title="@string/order_title" />
+        android:title="@string/order_title"
+        />
 
     <item
         android:id="@+id/profileSellerFragment"

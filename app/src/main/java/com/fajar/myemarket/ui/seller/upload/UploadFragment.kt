@@ -181,6 +181,7 @@ class UploadFragment: Fragment(R.layout.fragment_upload) {
                 // Fetch the seller's name from the user collection
                 firestore.collection("user").document(userId).get().addOnSuccessListener { userSnapshot ->
                     val sellerName = userSnapshot.getString("name")
+                    val sellerId = userId
 
                     // Create a product object
                     val product = Product(
@@ -193,7 +194,8 @@ class UploadFragment: Fragment(R.layout.fragment_upload) {
                         selectedColors,
                         sizes,
                         images,
-                        sellerName // Include the seller's name in the product data
+                        sellerName,
+                        sellerId// Include the seller's name in the product data
                     )
 
                     // Upload product data to "Products" collection

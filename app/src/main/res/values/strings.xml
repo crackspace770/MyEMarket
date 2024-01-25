@@ -26,6 +26,7 @@
     <string name="home_title">Home</string>
     <string name="transaction_title">Transaction</string>
     <string name="order_title">Order</string>
+    <string name="item_title">Item</string>
     <string name="status">Status</string>
 
     <string name="password_error">Kata sandi kurang dari 6 karakter</string>

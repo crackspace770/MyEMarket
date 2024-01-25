@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarOrderDetails"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageCloseOrder"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_close"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvOrderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp"
+                    android:text="#1234567"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageCloseOrder"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <LinearLayout
+            android:id="@+id/linearStepView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/toolbarOrderDetails">
+
+            <com.shuhart.stepview.StepView
+                android:id="@+id/stepView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:sv_selectedCircleColor="@color/g_orange_yellow"
+                app:sv_selectedTextColor="@color/g_gray700"
+                app:sv_stepLineWidth="3dp"
+                app:sv_stepPadding="4dp"
+                app:sv_nextTextColor="@color/g_gray700"
+                app:sv_nextStepLineColor="@color/g_gray700"
+                app:sv_doneCircleColor="@color/g_orange_yellow"
+                app:sv_doneStepLineColor="@color/g_orange_yellow"
+                app:sv_doneCircleRadius="14dp"
+                app:sv_selectedCircleRadius="14dp"
+                app:sv_selectedStepNumberColor="@color/g_blue_gray200"
+                app:sv_stepViewStyle="@style/StepView"
+                app:sv_doneStepMarkColor="@color/g_blue_gray200"
+                app:sv_stepNumberTextSize="12sp"
+                app:sv_animationType="Line"
+                app:sv_doneTextColor="@color/g_gray700"
+                />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tvShippingAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/linearStepView"
+            app:drawableLeftCompat="@drawable/ic_location" />
+
+        <LinearLayout
+            android:id="@+id/linearAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tvShippingAddress">
+
+
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="0dp"
+            android:layout_height="1sp"
+            android:layout_marginTop="15dp"
+            android:background="@color/g_blue_gray200"
+            app:layout_constraintTop_toBottomOf="@id/linearAddress"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            android:backgroundTint="@color/g_blue_gray200"
+            />
+
+        <TextView
+            android:id="@+id/tvProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Products"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/line1"
+            app:drawableLeftCompat="@drawable/baseline_add_shopping_cart_24"
+            android:drawablePadding="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="340dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/purple2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProducts">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="340dp"
+                android:layout_height="240dp">
+
+                <ImageView
+                    android:id="@+id/imgProduct"
+                    android:layout_width="143dp"
+                    android:layout_height="186dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tvProductsName"
+                    android:layout_width="147dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Special Product Name"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/imgProduct"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvQuantities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2"
+                    app:layout_constraintStart_toEndOf="@+id/imgProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/tvProductsName" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="X"
+                    app:layout_constraintStart_toEndOf="@+id/tvQuantities"
+                    app:layout_constraintTop_toBottomOf="@+id/tvProductsName" />
+
+                <TextView
+                    android:id="@+id/tvPrices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="200"
+                    app:layout_constraintStart_toEndOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/tvProductsName" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="42dp"
+                    android:text="Total Price"
+                    app:layout_constraintStart_toEndOf="@+id/imgProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/tvQuantities" />
+
+                <TextView
+                    android:id="@+id/tvTotalPrices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="400"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imgProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="316dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirm" />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="316dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="Confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

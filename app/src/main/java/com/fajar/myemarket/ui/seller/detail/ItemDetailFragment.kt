@@ -32,7 +32,7 @@ class ItemDetailFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        hideBottomNavView()
+      //  hideBottomNavView()
         binding = FragmentItemDetailBinding.inflate(inflater)
         return binding.root
     }

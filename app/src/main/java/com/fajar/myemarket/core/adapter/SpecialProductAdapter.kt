@@ -9,8 +9,6 @@ import com.bumptech.glide.Glide
 import com.fajar.myemarket.core.model.Product
 import com.fajar.myemarket.databinding.SpecialRvItemBinding
 
-
-
 class SpecialProductAdapter() :
     RecyclerView.Adapter<SpecialProductAdapter.SpecialProductsViewHolder>() {
 

@@ -59,7 +59,7 @@
             android:id="@+id/tvPaymentExplanation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Keline dose not support virtual payments. You can pay when you receive your order."
+            android:text="You can pay when you receive your order."
             app:layout_constraintTop_toBottomOf="@id/tvPaymentMethods"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toTopOf="@id/tvShoppingAddress"
             app:layout_constraintBottom_toBottomOf="@id/tvShoppingAddress"
             android:src="@drawable/ic_add"
-            app:tint="@color/g_dark_blue"
+            app:tint="@color/purple"
             />
 
         <FrameLayout
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:indeterminateTint="@color/g_blue"
+                android:indeterminateTint="@color/purple"
                 android:visibility="gone"/>
 
         </FrameLayout>

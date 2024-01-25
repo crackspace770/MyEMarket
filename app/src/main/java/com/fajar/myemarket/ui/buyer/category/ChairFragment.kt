@@ -69,12 +69,6 @@ class ChairFragment: BaseCategoryFragment(){
 
     }
 
-    override fun onBestProductsPagingRequest() {
 
-    }
-
-    override fun onOfferPagingRequest() {
-
-    }
 
 }
