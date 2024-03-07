@@ -11,28 +11,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fajar.myemarket.core.model.Product
 import com.fajar.myemarket.databinding.CartProductItemBinding
+import com.fajar.myemarket.databinding.SellerItemBinding
+
 import com.fajar.myemarket.utils.getProductPrice
 
 class SellerProductAdapter: RecyclerView.Adapter<SellerProductAdapter.SellerItemViewHolder>() {
 
-    inner class SellerItemViewHolder( val binding: CartProductItemBinding) :
+    inner class SellerItemViewHolder( val binding: SellerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun bind(product: Product) {
             binding.apply {
-                Glide.with(itemView).load(product.images[0]).into(imageCartProduct)
-                tvProductCartName.text = product.name
+                Glide.with(itemView).load(product.images[0]).into(imageSpecialRvItem)
+                tvSpecialProductName.text = product.name
 
                 val priceAfterPercentage = product.offerPercentage.getProductPrice(product.price)
-                tvProductCartPrice.text = "$ ${String.format("%.2f", priceAfterPercentage)}"
-
-                val backgroundColor = product.colors?.firstOrNull() ?: Color.TRANSPARENT
-                imageCartProductColor.setBackgroundColor(backgroundColor)
-
-                tvCartProductSize.text = (product.sizes?:"".also { imageCartProductSize.setImageDrawable(
-                    ColorDrawable(Color.TRANSPARENT)
-                ) }).toString()
+                tvSpecialProductPrice.text = "$ ${String.format("%.2f", priceAfterPercentage)}"
             }
         }
     }
@@ -51,7 +46,7 @@ class SellerProductAdapter: RecyclerView.Adapter<SellerProductAdapter.SellerItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SellerItemViewHolder {
         return SellerItemViewHolder(
-            CartProductItemBinding.inflate(
+            SellerItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )

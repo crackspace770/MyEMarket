@@ -51,8 +51,6 @@ class LoginActivity:AppCompatActivity() {
             onAction()
         }
 
-   //     login()
-   //     onAction()
     }
 
     private fun login() {

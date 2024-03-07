@@ -3,14 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/seller_graph"
-    app:startDestination="@id/uploadFragment">
+    app:startDestination="@id/sellerItemFragment">
 
-    <fragment
-        android:id="@+id/uploadFragment"
-        android:name="com.fajar.myemarket.ui.seller.upload.UploadFragment"
-        android:label="UploadFragment"
-        tools:layout="@layout/fragment_upload"
-        />
+
     <fragment
         android:id="@+id/sellerItemFragment"
         android:name="com.fajar.myemarket.ui.seller.item.SellerItemFragment"
@@ -20,7 +15,18 @@
         <action
             android:id="@+id/action_sellerOrderFragment_to_itemDetailFragment"
             app:destination="@id/itemDetailFragment" />
+        <action
+            android:id="@+id/action_sellerItemFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.fajar.myemarket.ui.seller.upload.UploadFragment"
+        android:label="UploadFragment"
+        tools:layout="@layout/fragment_upload"
+        />
+
     <fragment
         android:id="@+id/profileSellerFragment"
         android:name="com.fajar.myemarket.ui.seller.profile.ProfileSellerFragment"

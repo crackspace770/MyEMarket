@@ -181,7 +181,6 @@ class EditProfileActivity:AppCompatActivity() {
 
     private fun updateData() {
         val userId = auth.currentUser!!.uid
-
         val nName = binding.edNama.text.toString()
         val nPhoneNumber = binding.edNoHp.text.toString()
         val nAddress = binding.edAlamat.text.toString()

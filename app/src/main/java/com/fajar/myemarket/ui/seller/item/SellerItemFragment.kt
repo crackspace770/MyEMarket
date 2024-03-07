@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fajar.myemarket.R
@@ -72,12 +73,18 @@ class SellerItemFragment: Fragment(R.layout.fragment_seller_item) {
             findNavController().navigate(action)
         }
 
+        binding.fab.setOnClickListener {
+            val action =
+                SellerItemFragmentDirections.actionSellerItemFragmentToUploadFragment()
+            findNavController().navigate(action)
+        }
+
 
     }
 
     private fun setupProductRV(){
         binding.rvItem.apply {
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
             adapter = productAdapter
             addItemDecoration(VerticalItemDecoration())
         }

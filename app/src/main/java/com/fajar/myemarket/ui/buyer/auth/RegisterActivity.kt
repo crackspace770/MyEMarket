@@ -122,8 +122,6 @@ class RegisterActivity:AppCompatActivity() {
                         }
                     }
 
-
-
             }
         }
 

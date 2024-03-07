@@ -23,7 +23,6 @@ class SellerOrderDetailViewModel @Inject constructor(
     private val _updateOrderStatusResult = MutableStateFlow<Resource<Unit>>(Resource.Unspecified())
     val updateOrderStatusResult = _updateOrderStatusResult.asStateFlow()
 
-
     fun updateOrderStatus(orderId: Long, newStatus: String) {
         val userId = auth.uid
 
@@ -41,9 +40,6 @@ class SellerOrderDetailViewModel @Inject constructor(
 
                         // Update the order status in the global "orders" collection
                         updateOrderStatusInCollection("orders", orderId, newStatus)
-
-                        // Update the order status in the user's "orders" collection
-                        updateOrderStatusInUserCollection(userId, orderId, newStatus)
                     } else {
                         Log.e("SellerOrderDetail", "User is not a seller")
                         // Handle the case where the user is not a seller
@@ -63,32 +59,25 @@ class SellerOrderDetailViewModel @Inject constructor(
     private fun updateOrderStatusInCollection(collection: String, orderId: Long, newStatus: String) {
         // Update the order status in the specified collection
         firestore.collection(collection)
-            .document(orderId.toString())
-            .update("orderStatus", newStatus)
-            .addOnSuccessListener {
-                Log.d("SellerOrderDetail", "$collection order status updated successfully")
-                _updateOrderStatusResult.value = Resource.Success(Unit)
+            .whereEqualTo("orderId", orderId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    // Update the order status for each document with the specified orderId
+                    document.reference.update("orderStatus", newStatus)
+                        .addOnSuccessListener {
+                            Log.d("SellerOrderDetail", "$collection order status updated successfully")
+                            _updateOrderStatusResult.value = Resource.Success(Unit)
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("SellerOrderDetail", "Error updating $collection order status: $exception")
+                            _updateOrderStatusResult.value = Resource.Error("Failed to update $collection order status.")
+                        }
+                }
             }
             .addOnFailureListener { exception ->
-                Log.e("SellerOrderDetail", "Error updating $collection order status: $exception")
-                _updateOrderStatusResult.value = Resource.Error("Failed to update $collection order status.")
-            }
-    }
-
-    private fun updateOrderStatusInUserCollection(userId: String, orderId: Long, newStatus: String) {
-        // Use the user's document reference to update the nested "orders" collection
-        firestore.collection("user")
-            .document(userId)
-            .collection("orders")
-            .document(orderId.toString())
-            .update("orderStatus", newStatus)
-            .addOnSuccessListener {
-                Log.d("SellerOrderDetail", "user/$userId/orders order status updated successfully")
-                _updateOrderStatusResult.value = Resource.Success(Unit)
-            }
-            .addOnFailureListener { exception ->
-                Log.e("SellerOrderDetail", "Error updating user/$userId/orders order status: $exception")
-                _updateOrderStatusResult.value = Resource.Error("Failed to update user/$userId/orders order status.")
+                Log.e("SellerOrderDetail", "Error querying $collection: $exception")
+                _updateOrderStatusResult.value = Resource.Error("Failed to query $collection.")
             }
     }
 }
