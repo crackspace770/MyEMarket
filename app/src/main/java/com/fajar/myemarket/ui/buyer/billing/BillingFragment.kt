@@ -3,6 +3,7 @@ package com.fajar.myemarket.ui.buyer.billing
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,22 @@ import com.fajar.myemarket.core.model.CartProduct
 import com.fajar.myemarket.core.model.Order
 import com.fajar.myemarket.core.model.OrderStatus
 import com.fajar.myemarket.databinding.FragmentBillingBinding
+import com.fajar.myemarket.ui.buyer.profile.ProfileFragment
+import com.fajar.myemarket.utils.Constants.BASE_URL_MIDTRANS
+import com.fajar.myemarket.utils.Constants.CLIENT_KEY_MIDTRANS
 import com.fajar.myemarket.utils.HorizontalItemDecoration
 import com.fajar.myemarket.utils.Resource
+import com.fajar.myemarket.utils.loadImageUrl
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.midtrans.sdk.corekit.core.TransactionRequest
+import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
+import com.midtrans.sdk.corekit.models.BillingAddress
+import com.midtrans.sdk.corekit.models.CustomerDetails
+import com.midtrans.sdk.corekit.models.ShippingAddress
+import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -38,7 +52,8 @@ class BillingFragment:Fragment() {
     private val args by navArgs<BillingFragmentArgs>()
     private var products = emptyList<CartProduct>()
     private var totalPrice = 0f
-
+    private lateinit var auth: FirebaseAuth
+    private var db: FirebaseFirestore? = null
     private var selectedAddress: Address? = null
     private val billingOrderViewModel by viewModels<BillingOrderViewModel>()
 
@@ -68,6 +83,9 @@ class BillingFragment:Fragment() {
 
         setupBillingProductsRv()
         setupAddressRv()
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         if (!args.payment) {
             binding.apply {
@@ -150,6 +168,7 @@ class BillingFragment:Fragment() {
 
     }
 
+
     private fun showOrderConfirmationDialogue(){
         val alertDialog = AlertDialog.Builder(requireContext()).apply {
             setTitle("Order items")
@@ -165,11 +184,88 @@ class BillingFragment:Fragment() {
                     selectedAddress!!
                 )
                 billingOrderViewModel.placeOrder(order)
+
+                redirectToMidtrans()
+
                 dialog.dismiss()
             }
         }
         alertDialog.create()
         alertDialog.show()
+    }
+
+    private fun redirectToMidtrans() {
+        val itemDetails = ArrayList<com.midtrans.sdk.corekit.models.ItemDetails>()
+
+        val userId = auth.currentUser!!.uid
+        val dataUser = db?.collection("user")?.document(userId)
+
+        // Construct item details with order information and calculate total amount
+        var totalAmount = 0.0
+        for (cartProduct in products) {
+            val product = cartProduct.product
+            val detail = com.midtrans.sdk.corekit.models.ItemDetails(
+                product.id,
+                product.price.toDouble(),
+                cartProduct.quantity,
+                product.name
+            )
+            itemDetails.add(detail)
+            totalAmount += product.price.toDouble() * cartProduct.quantity
+        }
+
+        // Create TransactionRequest with total amount
+        val transactionRequest = TransactionRequest(
+            "Payment-Midtrans" + System.currentTimeMillis().toString(),
+            totalAmount
+        )
+
+        // Set item details
+        transactionRequest.itemDetails = itemDetails
+
+        dataUser?.addSnapshotListener { snapshot, exception ->
+            exception?.let {
+                Log.d(TAG, it.message.toString())
+                return@addSnapshotListener
+            }
+            snapshot?.let {
+                val name = it.get("fullName")
+                val email = it.get("email")
+                val phone = it.get("nomorHp")
+                val alamat = it.get("alamat")
+
+                // Set customer details
+                val customerDetails = CustomerDetails()
+                customerDetails.customerIdentifier = name.toString()
+                customerDetails.phone = phone.toString()
+                customerDetails.email = email.toString()
+                val shippingAddress = ShippingAddress()
+                shippingAddress.address = alamat.toString()
+                val billingAddress = BillingAddress()
+                billingAddress.address = alamat.toString()
+
+                customerDetails.billingAddress = billingAddress
+                transactionRequest.customerDetails = customerDetails
+
+                // Set other Midtrans SDK configurations
+                SdkUIFlowBuilder.init()
+                    .setClientKey(CLIENT_KEY_MIDTRANS)
+                    .setContext(requireContext())
+                    .setTransactionFinishedCallback { result ->
+                        // Handle transaction result here
+                        // You can use result.status to determine the transaction status
+                    }
+                    .setMerchantBaseUrl(BASE_URL_MIDTRANS)
+                    .enableLog(true)
+                    .setColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
+                    .setLanguage("id")
+                    .buildSDK()
+
+                // Start payment UI flow
+                MidtransSDK.getInstance().transactionRequest = transactionRequest
+                MidtransSDK.getInstance().startPaymentUiFlow(requireContext())
+            }
+        }
     }
 
 
@@ -188,6 +284,11 @@ class BillingFragment:Fragment() {
             addItemDecoration(HorizontalItemDecoration())
         }
     }
+
+    companion object {
+        const val TAG = "BillingFragment"
+    }
+
 
 }
 

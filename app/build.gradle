@@ -25,11 +25,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -43,6 +40,8 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+
 }
 
 dependencies {
@@ -111,5 +110,9 @@ dependencies {
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
 
     implementation ("com.github.shuhart:stepview:1.5.1")
+
+    //on sandbox mode
+    implementation ("com.midtrans:uikit:2.0.0-SANDBOX")
+    //implementation ("com.midtrans:uikit:1.23.1")
 
 }

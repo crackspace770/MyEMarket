@@ -46,6 +46,9 @@
             android:exported="false"
             />
 
+        <meta-data
+            android:name="com.google.gms.wallet.api.enabled"
+            android:value="true"/>
 
     </application>
 
