@@ -48,6 +48,6 @@ E-Market app where you can be either seller or buyer.
 ```
 3. Set up your midtrans account : https://dashboard.sandbox.midtrans.com/
 4. Get your Access key on Setting-> Access Key
-   <img src="https://github.com/crackspace770/MyEMarket/blob/master/screenshot/3.jpeg"/>
+   <img src="https://github.com/crackspace770/MyEMarket/blob/master/screenshot/api%20key.png"/>
 5. Copy your access key inside your code.
   
