@@ -39,3 +39,15 @@ E-Market app where you can be either seller or buyer.
 - [Circle Image View](https://github.com/hdodenhof/CircleImageView): To transform your image to circle view
 - [Color Picker](https://github.com/skydoves/ColorPickerView): Picking color using Hex code.
 - [StepView](https://github.com/shuhart/StepView): To animate order process.
+
+## Midtrans Set-Up
+1. Set up a sample Midtrans Merchant Server by hosting or local: https://github.com/rizdaprasetya/midtrans-mobile-merchant-server--php-sample-/tree/master
+2. Set up SDK : https://docs.midtrans.com/reference/android-sdk
+ ```
+ implementation ("com.midtrans:uikit:2.0.0-SANDBOX")
+```
+3. Set up your midtrans account : https://dashboard.sandbox.midtrans.com/
+4. Get your Access key on Setting-> Access Key
+   <img src="https://github.com/crackspace770/MyEMarket/blob/master/screenshot/3.jpeg"/>
+5. Copy your access key inside your code.
+  
